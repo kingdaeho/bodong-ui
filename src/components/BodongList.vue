@@ -1,10 +1,10 @@
 <template>
     <section>
         <ul>
-            <li v-for="(todoItem, index) in items" v-bind:key="todoItem">
+            <li v-for="(user, index) in propsdata" v-bind:key="user.id">
                 <i class="checkBtn fas fa-check" aria-hidden="true"></i>
-                {{ todoItem }}
-                <span class="removeBtn" type="button" v-on:click="removeTodo(todoItem,index)">
+                {{ user.id }}
+                <span class="removeBtn" type="button" v-on:click="removeUser(user, index)">
                     <i class="far fa-trash-alt" aria-hidden="true"></i>
                 </span>
             </li>
@@ -14,22 +14,10 @@
 
 <script>
     export default {
-        data() {
-            return {
-                items: []
-            }
-        },
-        created() {
-            if (localStorage.length > 0) {
-                for (var i = 0; i < localStorage.length; i++) {
-                    this.items.push(localStorage.key(i));
-                }
-            }
-        },
+        props: ['propsdata'],
         methods: {
-            removeTodo(todoItem, index) {
-                localStorage.removeItem(todoItem);
-                this.items.splice(index,1);
+            removeUser(member, index) {
+                this.$emit('removeUser', member, index);
             }
         }
     }

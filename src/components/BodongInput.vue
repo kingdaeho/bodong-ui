@@ -1,7 +1,7 @@
 <template>
     <div class="inputBox shadow">
-        <input type="text" v-model="newItem" placeholder="Type what you want to play" v-on:keyup.enter="addTodo"/>
-        <span class="addContainer" v-on:click="addTodo">
+        <input type="text" v-model="newUser" placeholder="Type your nickname" v-on:keyup.enter="addUser"/>
+        <span class="addContainer" v-on:click="addUser">
             <i class="addBtn fas fa-plus" aria-hidden="true"></i>
         </span>
     </div>
@@ -11,19 +11,19 @@
     export default {
         data() {
             return {
-                newItem: ''
+                newUser: ''
             }
         },
         methods: {
-            addTodo() {
-                var value = this.newItem && this.newItem.trim();
+            addUser() {
+                var value = this.newUser && this.newUser.trim();
                 if (value != undefined && value.length > 0) {
-                    localStorage.setItem(value, value);
+                    this.$emit('addUser', value);
                     this.clearInput();
                 }
             },
             clearInput() {
-                this.newItem = '';
+                this.newUser = '';
             }
         }
     }
